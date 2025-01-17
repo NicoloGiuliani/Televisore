@@ -27,33 +27,24 @@ public class Main {
                     break;
                 case 2:
                     televisore.scansionaCanali();
+                    break;
                 case 3:
-                    int canale = -1;
-
-                    if (televisore.isacceso() && televisore.isCanaliScansionati()) {
-                        System.out.println("Quale canale vuoi guardare?");
-                        canale = input.nextInt();
-                    }
-
-                    Canale canale2;
-                    canale2 = televisore.guardaCanale(canale);
-
-                    if (canale2 == null) {
-                        System.out.println("Per guardare il canale, il televisore deve essere acceso!\n");
-                    
-                        if (!televisore.isCanaliScansionati()) {
-                            System.out.println("Per guardare i canali devi prima effettuare la scansione\n");
+                    if (televisore.isAcceso()) {
+                        if (televisore.isCanaliScansionati()) {
+                            System.out.println("Inserisci il canale: ");
+                            scelta = input.nextInt();
+                            Canale canale = televisore.guardaCanale(scelta);
+                            if (canale != null) {
+                                System.out.println("Stai guardando " + canale);
+                            } else {
+                                System.out.println("Canale " + scelta + " non trovato!");
+                            }
+                        } else {
+                            System.out.println("Non sono stati scansionati i canali");
                         }
-                        else if (televisore.listaVuota()) {
-                            System.out.println("Nessun canale trovato\n");
-                        }
-                        break;
+                    } else {
+                        System.out.println("Il televisore dev'essere acceso");
                     }
-
-                    if (!televisore.isCanaliScansionati()) {
-                        System.out.println("Nessun canale scansionato\n");
-                    } else
-                        System.out.println("Stai guardando il canale: " + canale2 + "\n");
                     break;
                 case 4:
                     televisore.alzaVolume();
