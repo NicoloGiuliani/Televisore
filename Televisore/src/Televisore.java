@@ -7,6 +7,7 @@ public class Televisore {
 
     Random r = new Random();
     private boolean acceso;
+    private boolean canaliScansionati;
     private int volume;
     List<Canale> canaliMemorizzati;
     ArrayList<Canale> listaCanali;
@@ -19,25 +20,29 @@ public class Televisore {
     //COSTRUTTORE
     public Televisore() {
         acceso = false;
+        canaliScansionati = false;
         volume = 5;
         listaCanali = new ArrayList<>();
     }
 
-    public void accendi() {
-        if (acceso) {
-            System.out.println("La TV è accesa");
-            acceso = true;
-        }
-        else System.out.println("La TV è già accesa");
+    //GETTER
+    public boolean isacceso() {
+        return acceso;
     }
 
-    public void spegni() {
+    public boolean isCanaliScansionati() {
+        return canaliScansionati;
+    }
+
+    //METODI
+    public void ON_OFF() {
         if (acceso) {
-            System.out.println("La TV è già spenta");
+            System.out.println("La TV è spenta\n");
+            acceso = false;
         }
         else {
-        acceso = true;
-        System.out.println("La TV si è spenta");
+            System.out.println("La TV è accesa\n");
+            acceso=true;
         }
     }
 
@@ -52,18 +57,25 @@ public class Televisore {
                 listaCanali.add(new Canale(nomiCanali[i], i, r.nextInt(), r.nextInt(100)+1)); 
             }
             canaliMemorizzati = listaCanali.stream().filter(canale->canale.getFrequenza()>=30).collect(Collectors.toList());
+            canaliScansionati = true;
         }
         if(canaliMemorizzati.isEmpty()) {
             System.out.println("Nessun canale trovato (la potenza del segnale era troppo bassa!).");
         }
     }
     
-    public void guardaCanale(int nrCanale) {
+    public boolean listaVuota() {
+        return canaliMemorizzati.isEmpty();
+    }
+
+    public Canale guardaCanale(int nrCanale) {
+        if (nrCanale==-1) return null;
+        
         if(!acceso) {
-            System.out.println("Per effettuare la scansione, il televisore deve essere acceso!");
-            return;
+            return null;
         }
-        System.out.println("Stai guardando il canale: "+ listaCanali.get(nrCanale));
+        
+        return listaCanali.get(nrCanale); 
     }
 
     public void alzaVolume() {
@@ -93,4 +105,10 @@ public class Televisore {
             System.out.println("Volume abbassato a: "+volume);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Televisore [acceso=" + acceso + ", volume=" + volume + ", canaliMemorizzati=" + canaliMemorizzati + "canaliScansionati=" + canaliScansionati
+                + ", listaCanali=" + listaCanali + "]";
+    } 
 }
