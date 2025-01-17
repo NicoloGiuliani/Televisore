@@ -1,3 +1,5 @@
+package com.githubNicolo;
+
 public class Canale {
     private String nomeCanale;
     private int nrCanale;
@@ -32,8 +34,7 @@ public class Canale {
     //TO STRING
     @Override
     public String toString() {
-        return "Nome canale= " + nomeCanale + ", frequenza=" + frequenza
-                + ", potenzaRilevata=" + potenzaRilevata;
+        return "\n Nome canale= " + nomeCanale + ", numero canale= "+ nrCanale;
     }
 
 }

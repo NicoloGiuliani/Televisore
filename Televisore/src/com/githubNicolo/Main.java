@@ -1,3 +1,4 @@
+package com.githubNicolo;
 import java.util.Scanner;
 
 public class Main {
@@ -6,10 +7,9 @@ public class Main {
 
         Televisore televisore = new Televisore();
         int scelta = 0;
-
+        System.out.println("Benvenuto nel menù del televisore\n");
         while (scelta != 6) {
-            System.out.println("Benvenuto nel menù del televisore\n");
-            System.out.println("Stato attuale del televisore: " + televisore.toString());
+            System.out.println("Stato attuale del televisore: " + televisore.toString() + "\n");
 
             System.out.println("1. accendi/spegni");
             System.out.println("2. scansiona canali");
@@ -31,19 +31,20 @@ public class Main {
                 case 3:
                     if (televisore.isAcceso()) {
                         if (televisore.isCanaliScansionati()) {
-                            System.out.println("Inserisci il canale: ");
+                            System.out.println("I canali memorizzati sono: "+ televisore.canaliMemorizzati);
+                            System.out.println("\nInserisci il canale: ");
                             scelta = input.nextInt();
                             Canale canale = televisore.guardaCanale(scelta);
                             if (canale != null) {
-                                System.out.println("Stai guardando " + canale);
+                                System.out.println("Stai guardando " + canale.getNomeCanale()+ "\n");
                             } else {
-                                System.out.println("Canale " + scelta + " non trovato!");
+                                System.out.println("Canale " + scelta + " non trovato!\n");
                             }
                         } else {
-                            System.out.println("Non sono stati scansionati i canali");
+                            System.out.println("Non sono stati scansionati i canali\n");
                         }
                     } else {
-                        System.out.println("Il televisore dev'essere acceso");
+                        System.out.println("Il televisore dev'essere acceso\n");
                     }
                     break;
                 case 4:
